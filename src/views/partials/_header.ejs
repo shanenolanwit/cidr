@@ -4,12 +4,29 @@
     <meta charset="UTF-8">
     <title>CIDR</title>
     <!-- NAVIGATION -->
-    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <style>
+    @keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+img#frisby {
+    animation: blink 3s;
+    animation-iteration-count: 1;
+}
+    </style>
   </head>
   <body>
 
     <!-- navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">CIDR</a>
+      <a class="navbar-brand" href="/">CIDR @ <%= serverip %></a>
     </nav>
     

@@ -1,23 +1,24 @@
 const controller = {};
 
 controller.list = (req, res) => {
-  
+  var ip = req.ip;
   req.getConnection((err, conn) => {
     conn.query('SELECT * FROM cidr', (err, cidrs) => {
      if (err) {
       res.json(err);
      }
      if(cidrs.length === 0){
-      req.flash('message', "Not enough CIDR");
+      //req.flash('message', "Not enough CIDR");
      }
      else if(cidrs.length% 10 === 0){
-      req.flash('message', "Go at it again. Not enough CIDR");
+      req.flash('message', "Go at it again");
      } else {
-      req.flash('message', "Not enough CIDR, have " + (10 - cidrs.length% 10) + " more anyway");
+      req.flash('message', "Have " + (10 - cidrs.length% 10) + " more anyway");
      }
      
      res.render('cidrs', {
         data: cidrs,
+        serverip: ip,
         message: req.flash('message')
      });
     });
