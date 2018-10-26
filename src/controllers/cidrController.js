@@ -1,7 +1,14 @@
 const controller = {};
 
+var macaddress = require('macaddress');
+
 controller.list = (req, res) => {
-  var ip = req.ip;
+ 
+  var servermac = ""
+  macaddress.one(function (err, mac) {
+    servermac = mac
+    console.log("Mac address for this host: %s", mac);  
+  });
   req.getConnection((err, conn) => {
     conn.query('SELECT * FROM cidr', (err, cidrs) => {
      if (err) {
@@ -18,7 +25,7 @@ controller.list = (req, res) => {
      
      res.render('cidrs', {
         data: cidrs,
-        serverip: ip,
+        servermac: servermac,
         message: req.flash('message')
      });
     });
@@ -65,6 +72,14 @@ controller.delete = (req, res) => {
       res.redirect('/');
     });
   });
+}
+
+controller.ping = (req, res) => {
+
+  macaddress.one(function (err, mac) {
+    res.json({id: req.params.id, date: new Date(), url: req.originalUrl, path: req.path, sentby: req.ip, receivedby: mac})
+  });
+  
 }
 
 module.exports = controller;
