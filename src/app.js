@@ -23,9 +23,9 @@ app.use(cookieParser('secret'));
 app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 app.use(myConnection(mysql, {
-  host: 'localhost',
+  host: 'cidr.cmbr0szpdyxj.eu-west-1.rds.amazonaws.com',
   user: 'root',
-  password: 'root',
+  password: '20012561',
   port: 3306,
   database: 'cidr'
 }, 'single'));
