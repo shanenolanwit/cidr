@@ -45,10 +45,16 @@ controller.save = (req, res) => {
 
 controller.edit = (req, res) => {
   const { id } = req.params;
+  var servermac = ""
+  macaddress.one(function (err, mac) {
+    servermac = mac
+    console.log("Mac address for this host: %s", mac);  
+  });
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM cidr WHERE id = ?", [id], (err, rows) => {
       res.render('cidrs_edit', {
-        data: rows[0]
+        data: rows[0],
+        servermac: servermac
       })
     });
   });

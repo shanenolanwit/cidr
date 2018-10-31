@@ -47,9 +47,6 @@
         </form>
         <img src="images/pintman.jpg" style="opacity: 0.<%= data.length%10 %>;" />
         <% if (message.length > 0 ) { %>
-          <% if (message != 'Go at it again' ) { %>
-            <div class="form-control"><img id="frisby" src="images/notenough.PNG"/></div>
-          <% } %>
           <div class="alert alert-danger form-control"><%= message %></div>
         <% } %>
       </div>
